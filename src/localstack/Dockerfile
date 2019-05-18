@@ -16,6 +16,7 @@ RUN \
   apt-get -y install \
     build-essential \
     make \
+    git \
     default-jdk \
     maven \
     python3-pip \
@@ -24,5 +25,7 @@ RUN \
   && curl "https://bootstrap.pypa.io/get-pip.py" -o - | python3
 
 FROM build_env as localstack
+WORKDIR /src
 RUN \
-    pip install localstack
+  git clone https://github.com/localstack/localstack \
+  && pip install localstack
